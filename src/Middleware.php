@@ -34,20 +34,20 @@ class Middleware {
             // Add more information to the PrettyPageHandler
             $prettyPageHandler->addDataTable('Slim Application', [
                 'Application Class' => get_class($this->app),
-                'Script Name'       => $this->app->environment->get('SCRIPT_NAME'),
-                'Request URI'       => $this->app->environment->get('PATH_INFO') ?: '<none>',
+                'Script Name'       => $container['environment']->get('SCRIPT_NAME'),
+                'Request URI'       => $container['environment']->get('PATH_INFO') ?: '<none>',
             ]);
 
             $prettyPageHandler->addDataTable('Slim Application (Request)', array(
-                'Accept Charset'  => $this->app->request->getHeader('ACCEPT_CHARSET') ?: '<none>',
-                'Content Charset' => $this->app->request->getContentCharset() ?: '<none>',
-                'Path'            => $this->app->request->getUri()->getPath(),
-                'Query String'    => $this->app->request->getUri()->getQuery() ?: '<none>',
-                'HTTP Method'     => $this->app->request->getMethod(),
-                'Base URL'        => (string) $this->app->request->getUri(),
-                'Scheme'          => $this->app->request->getUri()->getScheme(),
-                'Port'            => $this->app->request->getUri()->getPort(),
-                'Host'            => $this->app->request->getUri()->getHost(),
+                'Accept Charset'  => $container['request']->getHeader('ACCEPT_CHARSET') ?: '<none>',
+                'Content Charset' => $container['request']->getContentCharset() ?: '<none>',
+                'Path'            => $container['request']->getUri()->getPath(),
+                'Query String'    => $container['request']->getUri()->getQuery() ?: '<none>',
+                'HTTP Method'     => $container['request']->getMethod(),
+                'Base URL'        => (string) $container['request']->getUri(),
+                'Scheme'          => $container['request']->getUri()->getScheme(),
+                'Port'            => $container['request']->getUri()->getPort(),
+                'Host'            => $container['request']->getUri()->getHost(),
             ));
 
             // Set Whoops to default exception handler
